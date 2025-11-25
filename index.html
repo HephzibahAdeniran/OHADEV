@@ -1779,6 +1779,134 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
   </div>
 </section>
+<!-- Address -->
+  <div class="form-group">
+    <label for="address">Full Address</label>
+    <input id="address" name="address" type="text" placeholder="Street, City, Postcode">
+  </div>
+
+  <!-- City -->
+  <div class="form-group">
+    <label for="city">City</label>
+    <input id="city" name="city" type="text">
+  </div>
+
+  <!-- Country -->
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input id="country" name="country" type="text">
+  </div>
+
+  <!-- Project Type -->
+  <div class="form-group">
+    <label for="project_type">Project Type</label>
+    <select id="project_type" name="project_type">
+      <option value="">-- Select one --</option>
+      <option value="personal">Personal Project</option>
+      <option value="business">Business Project</option>
+      <option value="startup">Startup</option>
+      <option value="nonprofit">Non‑Profit</option>
+    </select>
+  </div>
+
+  <!-- Budget Range -->
+  <div class="form-group">
+    <label for="budget">Budget Range</label>
+    <input id="budget" name="budget" type="number" placeholder="Enter amount in £">
+  </div>
+
+  <!-- Deadline -->
+  <div class="form-group">
+    <label for="deadline">Deadline</label>
+    <input id="deadline" name="deadline" type="date">
+  </div>
+
+  <!-- Preferred Platform -->
+  <div class="form-group">
+    <label for="platform">Preferred Platform</label>
+    <select id="platform" name="platform">
+      <option value="">-- Choose one --</option>
+      <option value="wordpress">WordPress</option>
+      <option value="custom_code">Custom Code</option>
+      <option value="shopify">Shopify</option>
+      <option value="wix">Wix</option>
+    </select>
+  </div>
+
+  <!-- File Upload -->
+  <div class="form-group">
+    <label for="attachment">Attach Files (optional)</label>
+    <input id="attachment" name="attachment" type="file" multiple>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="form-group">
+    <label>
+      <input type="checkbox" name="newsletter">
+      Sign me up for updates & newsletters
+    </label>
+  </div>
+</form>
+<style>
+/* 3D Form Styles */
+  .form3d {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 15px;
+  box-shadow: 10px 10px 20px #c9c9c9, -10px -10px 20px #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  background: #f9f9f9;
+  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  box-shadow: inset 2px 2px 5px #d1d1d1, inset -2px -2px 5px #ffffff;
+}
+
+.btn-gold {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffd700, #e6c200);
+  color: #333;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #c9c9c9, -5px -5px 10px #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 15px #c9c9c9, -8px -8px 15px #ffffff;
+}
+</style>
 <script>
 // Run after page loads
 document.addEventListener("DOMContentLoaded", () => {
