@@ -1793,12 +1793,31 @@ document.addEventListener("DOMContentLoaded", () => {
                   style="width:100%;padding:12px;border-radius:10px;border:none;background:#0d0d0d;color:#fff;box-shadow:inset 5px 5px 10px #000,inset -5px -5px 10px #222;"></textarea>
       </div>
 
-      <!-- File Upload -->
-      <div class="form-group" style="margin-bottom:20px;">
-        <label for="attachment" style="color:#D4AF37;font-weight:600;">Attach File</label>
-        <input id="attachment" name="attachment" type="file"
-               style="width:100%;padding:12px;border-radius:10px;border:none;background:#0d0d0d;color:#fff;box-shadow:inset 5px 5px 10px #000,inset -5px -5px 10px #222;">
-      </div>
+<div class="form-group" style="margin-bottom:20px;">
+  <form action="/upload" method="POST" enctype="multipart/form-data" style="width:100%;">
+    <label for="attachment" style="color:#D4AF37;font-weight:600;">Attach File</label>
+    <input id="attachment" name="attachment" type="file"
+           style="width:100%;padding:12px;border-radius:10px;border:none;background:#0d0d0d;color:#fff;box-shadow:inset 5px 5px 10px #000,inset -5px -5px 10px #222;">
+    <button type="submit" style="margin-top:15px;padding:10px 20px;border:none;border-radius:8px;background:#D4AF37;color:#000;font-weight:600;">
+      Upload
+    </button>
+    <p id="preview" style="margin-top:15px;color:#ccc;"></p>
+  </form>
+</div>
+
+<script>
+  const input = document.getElementById('attachment');
+  const preview = document.getElementById('preview');
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) {
+      preview.textContent = `Selected file: ${file.name} (${Math.round(file.size/1024)} KB)`;
+    } else {
+      preview.textContent = '';
+    }
+  });
+</script>
+
 
       <!-- Consent -->
       <div class="form-group" style="margin-bottom:20px;color:#ccc;">
