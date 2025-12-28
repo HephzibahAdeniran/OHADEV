@@ -1242,238 +1242,213 @@
   backdrop-filter: blur(4px);
 }
 </style>
-<!-- MO1 PRODUCT -->
+<!-- ========================= -->
+<!--   GLOBAL VIDEO STYLES     -->
+<!-- ========================= -->
+<style>
+  .yt-lite {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .yt-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .sg-video-label-row {
+    position: absolute;
+    z-index: 5;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.55);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    backdrop-filter: blur(4px);
+  }
+
+  .sg-eyebrow {
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .sg-video-tag {
+    opacity: 0.8;
+  }
+</style>
+
+<!-- ========================= -->
+<!--   GLOBAL VIDEO SCRIPT     -->
+<!-- ========================= -->
+<script>
+(function(){
+  function autoplayAllVideos() {
+    document.querySelectorAll('.yt-lite').forEach(box => {
+      const id = box.dataset.ytid;
+      if (!id) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src =
+        `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}`;
+      iframe.title = 'Product Demo Video';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'yt-iframe';
+
+      box.innerHTML = '';
+      box.appendChild(iframe);
+    });
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(autoplayAllVideos, 200);
+  });
+})();
+</script>
+
+<!-- ========================= -->
+<!--         MO1 SECTION       -->
+<!-- ========================= -->
 <section id="sg-mo1" class="sg-product-section">
   <div class="sg-product-inner">
 
-    <!-- Video -->
+    <!-- VIDEO -->
     <div class="sg-product-media full-video-wrapper">
-
-      <div class="sg-video-label-row video-overlay-labels">
-        <span class="sg-eyebrow">MO1 Smart Glasses</span>
-        <span class="sg-video-tag">Click to play demo</span>
-      </div>
-
-      <div class="yt-lite" 
-           data-ytid="SHjEXiT8pC0"
-           role="button"
-           tabindex="0"
-           aria-label="Play MO1 demo video">
-
-        <picture>
-          <source srcset="assets/media/SHjEXiT8pC0.webp" type="image/webp">
-          <img src="assets/media/SHjEXiT8pC0.jpg"
-               alt="MO1 Smart Glasses demo thumbnail"
-               loading="lazy"
-               width="800"
-               height="450"
-               class="yt-thumb">
-        </picture>
-
-        <div class="yt-play-icon"></div>
-      </div>
-
-      <script>
-        (function(){
-          function playVideo(box) {
-            const id = box?.dataset?.ytid;
-            if (!id) return;
-
-            const iframe = document.createElement('iframe');
-            iframe.src =
-              `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}`;
-            iframe.title = 'MO1 Demo Video';
-            iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.className = 'yt-iframe';
-
-            box.innerHTML = '';
-            box.appendChild(iframe);
-          }
-
-          function autoplayFirstVisible() {
-            const items = document.querySelectorAll('.yt-lite');
-            for (const box of items) {
-              const rect = box.getBoundingClientRect();
-              if (rect.top < window.innerHeight && rect.bottom > 0) {
-                playVideo(box);
-                break;
-              }
-            }
-          }
-
-          document.addEventListener('click', e => {
-            const box = e.target.closest('.yt-lite');
-            if (box) playVideo(box);
-          });
-
-          document.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              const box = document.activeElement.closest('.yt-lite');
-              if (box) {
-                e.preventDefault();
-                playVideo(box);
-              }
-            }
-          });
-
-          window.addEventListener('load', () => {
-            setTimeout(autoplayFirstVisible, 300);
-          });
-        })();
-      </script>
-
-      <style>
-        .yt-lite {
-          position: relative;
-          cursor: pointer;
-          display: block;
-          width: 100%;
-          border-radius: 12px;
-          overflow: hidden;
-          background: #000;
-          aspect-ratio: 16 / 9; /* Prevents layout shift */
-        }
-
-        .yt-thumb {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        }
-
-        .yt-play-icon {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 68px;
-          height: 48px;
-          transform: translate(-50%, -50%);
-          background: url('assets/icons/youtube.svg') center/contain no-repeat;
-          opacity: 0.9;
-          pointer-events: none;
-        }
-
-        .yt-iframe {
-          width: 100%;
-          height: 100%;
-          border: 0;
-          display: block;
-        }
-      </style>
-
-    </div>
-
-<section id="sg-mo1" class="sg-product-section">
-  <div class="sg-product-inner">
-
-    <div class="sg-product-media full-video-wrapper">
-
-      <div class="sg-video-label-row video-overlay-labels">
+      <div class="sg-video-label-row">
         <span class="sg-eyebrow">MO1 Smart Glasses</span>
         <span class="sg-video-tag">Demo playing...</span>
       </div>
 
       <div class="yt-lite" data-ytid="SHjEXiT8pC0"></div>
-
-      <script>
-        (function(){
-          function autoplayAll() {
-            document.querySelectorAll('.yt-lite').forEach(box => {
-              const id = box.dataset.ytid;
-              if (!id) return;
-
-              const iframe = document.createElement('iframe');
-              iframe.src =
-                `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}`;
-              iframe.title = 'MO1 Demo Video';
-              iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-              iframe.setAttribute('allowfullscreen', '');
-              iframe.className = 'yt-iframe';
-
-              box.innerHTML = '';
-              box.appendChild(iframe);
-            });
-          }
-
-          window.addEventListener('load', () => {
-            setTimeout(autoplayAll, 200);
-          });
-        })();
-      </script>
-
-      <style>
-        .yt-lite {
-          width: 100%;
-          aspect-ratio: 16/9;
-          background: #000;
-          border-radius: 12px;
-          overflow: hidden;
-        }
-        .yt-iframe {
-          width: 100%;
-          height: 100%;
-          border: 0;
-          display: block;
-        }
-      </style>
-
     </div>
+
+    <!-- CONTENT -->
+    <div class="sg-product-content">
+      <h2 class="sg-product-title">MO1 - Smart AI Glasses</h2>
+      <p class="sg-product-text">
+        MO1 is your entry into AI smart glasses. Lightweight, simple to use, and powerful enough to help you
+        capture moments, ask questions, and translate on the go — without always pulling your phone out.
+      </p>
+
+      <div class="sg-product-meta">
+        <div>
+          <p class="sg-meta-label">Price</p>
+          <p class="sg-price-main">£89.99</p>
+          <p class="sg-meta-note">Discounts available on some orders</p>
+        </div>
+        <div>
+          <p class="sg-meta-label">Best for</p>
+          <p class="sg-meta-value">Everyday use, students, casual recording</p>
+        </div>
+      </div>
+
+      <div class="sg-product-block">
+        <h4 class="sg-block-title">What MO1 can do</h4>
+        <ul class="sg-feature-list">
+          <li><strong>5MP HD camera:</strong> Take photos and record video straight from the glasses.</li>
+          <li><strong>AI assistant:</strong> Ask questions and control functions with your voice.</li>
+          <li><strong>Object recognition:</strong> Helps the AI understand the environment around you.</li>
+          <li><strong>AI translation:</strong> Translate speech and text in real time when travelling.</li>
+          <li><strong>Touch controls:</strong> Control calls, music, and camera with taps on the frame.</li>
+          <li><strong>Noise‑reduction mic:</strong> Makes your voice clearer for calls and commands.</li>
+          <li><strong>Companion app:</strong> Manage recordings and settings from your phone.</li>
+          <li><strong>Lightweight design:</strong> Comfortable for all‑day wear with a sleek look.</li>
+          <li><strong>App integration:</strong> Works seamlessly with your phone's apps.</li>
+        </ul>
+      </div>
+
+      <div class="sg-product-block">
+        <h4 class="sg-block-title">Who MO1 is perfect for</h4>
+        <ul class="sg-feature-list sg-compact">
+          <li><strong>Students:</strong> Record lectures, speak to the AI, get help studying.</li>
+          <li><strong>Daily commuters:</strong> Listen, record, and control music hands‑free.</li>
+          <li><strong>First‑time users:</strong> If this is your first smart glasses, MO1 is a great starting point.</li>
+        </ul>
+      </div>
+
+      <div class="sg-product-actions">
+        <button class="sg-btn-primary sg-order-btn" data-model="MO1">I'm interested in MO1</button>
+        <button class="sg-btn-ghost sg-scroll-btn" data-target="#sg-mo2">See MO2 comparison</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================= -->
+<!--         MO2 SECTION       -->
+<!-- ========================= -->
 <section id="sg-mo2" class="sg-product-section sg-alt">
   <div class="sg-product-inner">
 
+    <!-- VIDEO -->
     <div class="sg-product-media full-video-wrapper">
-
-      <div class="sg-video-label-row video-overlay-labels">
+      <div class="sg-video-label-row">
         <span class="sg-eyebrow">MO2 Ultra AI Glasses</span>
         <span class="sg-video-tag">Demo playing...</span>
       </div>
 
       <div class="yt-lite" data-ytid="SDWqF6O7YqQ"></div>
-
-      <script>
-        (function(){
-          function autoplayAll() {
-            document.querySelectorAll('.yt-lite').forEach(box => {
-              const id = box.dataset.ytid;
-              if (!id) return;
-
-              const iframe = document.createElement('iframe');
-              iframe.src =
-                `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}`;
-              iframe.title = 'MO2 Demo Video';
-              iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-              iframe.setAttribute('allowfullscreen', '');
-              iframe.className = 'yt-iframe';
-
-              box.innerHTML = '';
-              box.appendChild(iframe);
-            });
-          }
-
-          window.addEventListener('load', () => {
-            setTimeout(autoplayAll, 200);
-          });
-        })();
-      </script>
-
-      <style>
-        .yt-lite {
-          width: 100%;
-          aspect-ratio: 16/9;
-          background: #000;
-          border-radius: 12px;
-          overflow: hidden;
-        }
-        .yt-iframe {
-          width: 100%;
-          height: 100%;
-          border: 0;
-          display: block;
-        }
-      </style>
-
     </div>
+
+    <!-- CONTENT -->
+    <div class="sg-product-content">
+      <h2 class="sg-product-title">MO2 - Ultra AI Smart Glasses + Smart Case</h2>
+      <p class="sg-product-text">
+        MO2 is made for power users: content creators, travellers, and people who need more recording power and
+        better flexibility. It has a stronger camera and includes a smart charging case for more battery life.
+      </p>
+
+      <div class="sg-product-meta">
+        <div>
+          <p class="sg-meta-label">Price</p>
+          <p class="sg-price-main">£119.99</p>
+          <p class="sg-meta-note">Discounts available on some orders</p>
+        </div>
+        <div>
+          <p class="sg-meta-label">Best for</p>
+          <p class="sg-meta-value">Creators, travel, long days, events</p>
+        </div>
+      </div>
+
+      <div class="sg-product-block">
+        <h4 class="sg-block-title">What MO2 adds on top of MO1</h4>
+        <ul class="sg-feature-list">
+          <li><strong>800W HD camera:</strong> Higher‑detail video and photos for vlogs and content.</li>
+          <li><strong>Smart charging case:</strong> Includes a charging case (brown or black) for extra battery.</li>
+          <li><strong>More style options:</strong> Frames in red or black, lenses for different uses.</li>
+          <li><strong>Advanced detection:</strong> Better recognition of people, objects, and scenes.</li>
+          <li><strong>Stronger all‑day use:</strong> Built with heavier use and more recording in mind.</li>
+          <li><strong>Lightweight design:</strong> Comfortable for all‑day wear with a sleek look.</li>
+          <li><strong>App integration:</strong> Works seamlessly with your phone's apps.</li>
+        </ul>
+      </div>
+
+      <div class="sg-product-block">
+        <h4 class="sg-block-title">Who MO2 is perfect for</h4>
+        <ul class="sg-feature-list sg-compact">
+          <li><strong>Content creators:</strong> Record POV videos, events, and behind‑the‑scenes footage.</li>
+          <li><strong>Travellers:</strong> Capture your trips and use translation at the same time.</li>
+          <li><strong>Heavy users:</strong> If you plan to record a lot every day, MO2 makes more sense.</li>
+        </ul>
+      </div>
+
+      <div class="sg-product-actions">
+        <button class="sg-btn-primary sg-order-btn" data-model="MO2">I'm interested in MO2</button>
+        <button class="sg-btn-ghost sg-scroll-btn" data-target="#sg-compare">Compare MO1 vs MO2</button>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- COMPARISON -->
 <section id="sg-compare" class="sg-compare-section">
