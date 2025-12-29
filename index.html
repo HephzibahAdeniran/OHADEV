@@ -173,17 +173,17 @@
       <p class="selector-subtitle">Choose your use case and we'll guide you.</p>
 
       <div class="selector-options" role="list">
-        <button class="selector-btn" type="button" onclick="location.href='#sg-mo1'" role="listitem">
+        <button class="selector-btn" type="button" onclick="location.href='#sg-mo1'">
           <span aria-hidden="true">🎓 Everyday use / study / commuting</span>
           <span>MO1 recommended</span>
         </button>
 
-        <button class="selector-btn" type="button" onclick="location.href='#sg-mo2'" role="listitem">
+        <button class="selector-btn" type="button" onclick="location.href='#sg-mo2'">
           <span aria-hidden="true">🎥 Content creation / travel / events</span>
           <span>MO2 recommended</span>
         </button>
 
-        <button class="selector-btn" type="button" onclick="location.href='#products'" role="listitem">
+        <button class="selector-btn" type="button" onclick="location.href='#products'">
           <span aria-hidden="true">🤔 Not sure yet</span>
           <span>Compare both models</span>
         </button>
@@ -330,6 +330,13 @@
   });
 })();
 </script>
+<script>
+  (function(){
+    document.querySelectorAll('a[href="#contact"]').forEach(function(a){
+      a.setAttribute('aria-label','Go to Contact section');
+    });
+  })();
+</script>
 
 <!-- ========================= -->
 <!--         MO1 SECTION       -->
@@ -368,7 +375,7 @@
       </div>
 
       <div class="sg-product-block">
-        <h4 class="sg-block-title">What MO1 can do</h4>
+        <h3 class="sg-block-title">What MO1 can do</h3>
         <ul class="sg-feature-list">
           <li><strong>5MP HD camera:</strong> Take photos and record video straight from the glasses.</li>
           <li><strong>AI assistant:</strong> Ask questions and control functions with your voice.</li>
@@ -383,7 +390,7 @@
       </div>
 
       <div class="sg-product-block">
-        <h4 class="sg-block-title">Who MO1 is perfect for</h4>
+        <h3 class="sg-block-title">Who MO1 is perfect for</h3>
         <ul class="sg-feature-list sg-compact">
           <li><strong>Students:</strong> Record lectures, speak to the AI, get help studying.</li>
           <li><strong>Daily commuters:</strong> Listen, record, and control music hands‑free.</li>
@@ -437,7 +444,7 @@
       </div>
 
       <div class="sg-product-block">
-        <h4 class="sg-block-title">What MO2 adds on top of MO1</h4>
+        <h3 class="sg-block-title">What MO2 adds on top of MO1</h3>
         <ul class="sg-feature-list">
           <li><strong>800W HD camera:</strong> Higher‑detail video and photos for vlogs and content.</li>
           <li><strong>Smart charging case:</strong> Includes a charging case (brown or black) for extra battery.</li>
@@ -450,7 +457,7 @@
       </div>
 
       <div class="sg-product-block">
-        <h4 class="sg-block-title">Who MO2 is perfect for</h4>
+        <h3 class="sg-block-title">Who MO2 is perfect for</h3>
         <ul class="sg-feature-list sg-compact">
           <li><strong>Content creators:</strong> Record POV videos, events, and behind‑the‑scenes footage.</li>
           <li><strong>Travellers:</strong> Capture your trips and use translation at the same time.</li>
