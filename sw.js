@@ -43,13 +43,10 @@ self.addEventListener('fetch', (event) => {
   // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
-  // Navigation requests -> return cached index.html (app shell)
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      caches.match('/index.html').then(resp => resp || fetch('/index.html'))
-    );
-    return;
-  }
+  // Navigation requests were previously intercepted for app-shell offline support.
+  // Avoid intercepting navigation responses here so the browser can use the back/forward
+  // cache (bfcache) and restore pages more reliably. Static caching of samples is still
+  // handled by the install/activate steps above.
 
   // Images: stale-while-revalidate
   if (url.pathname.startsWith('/assets/media') || /\.(png|jpg|jpeg|webp|svg)$/.test(url.pathname)) {

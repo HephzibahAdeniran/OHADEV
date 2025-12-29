@@ -44,10 +44,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <!-- Preconnect / prefetch for external assets to improve performance -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <!-- Preconnect / prefetch for external assets (limit to most important origins) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-  <link rel="preconnect" href="https://images.pexels.com" crossorigin>
   <link rel="preconnect" href="https://img.freepik.com" crossorigin>
 
   <!-- Preload hero image to improve LCP -->
@@ -1034,13 +1034,16 @@
       <div class="card"
            style="background:#121212;border:1px solid #2a2a2a;border-radius:18px;
                   overflow:hidden;transition:.3s;">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
+           <img src="assets/media/unsplash-1522202176988-800.webp"
+             srcset="assets/media/unsplash-1522202176988-480.webp 480w, assets/media/unsplash-1522202176988-800.webp 800w, assets/media/unsplash-1522202176988-1200.webp 1200w"
+             sizes="(max-width:600px) 100vw, 400px"
              alt="Client Website Project"
              width="400"
              height="200"
              loading="lazy"
              decoding="async"
-             style="width:100%;height:200px;object-fit:cover;">
+             style="width:100%;height:200px;object-fit:cover;"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop';">
         <div style="padding:20px;">
           <span class="badge">Client</span>
           <h3>MyVidda Project</h3>
@@ -1058,9 +1061,12 @@
       <div class="card"
            style="background:#121212;border:1px solid #2a2a2a;border-radius:18px;
                   overflow:hidden;transition:.3s;">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop"
+           <img src="assets/media/unsplash-1504384308090-800.webp"
+             srcset="assets/media/unsplash-1504384308090-480.webp 480w, assets/media/unsplash-1504384308090-800.webp 800w, assets/media/unsplash-1504384308090-1200.webp 1200w"
+             sizes="(max-width:600px) 100vw, 400px"
              alt="Creative Agency Demo"
-             width="400" height="200" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;">
+             width="400" height="200" loading="lazy" decoding="async" style="width:100%;height:200px;object-fit:cover;"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop';">
         <div style="padding:20px;">
           <span class="badge">Demo</span>
           <h3>Creative Agency Demo</h3>
@@ -1078,13 +1084,16 @@
       <div class="card"
            style="background:#121212;border:1px solid #2a2a2a;border-radius:18px;
                   overflow:hidden;transition:.3s;">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop"
+           <img src="assets/media/unsplash-1511671782779-800.webp"
+             srcset="assets/media/unsplash-1511671782779-480.webp 480w, assets/media/unsplash-1511671782779-800.webp 800w, assets/media/unsplash-1511671782779-1200.webp 1200w"
+             sizes="(max-width:600px) 100vw, 400px"
              alt="Music Artist Promo"
              width="400"
              height="200"
              loading="lazy"
              decoding="async"
-             style="width:100%;height:200px;object-fit:cover;">
+             style="width:100%;height:200px;object-fit:cover;"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop';">
         <div style="padding:20px;">
           <span class="badge">Demo</span>
           <h3>Music Artist Promo Demo</h3>
@@ -1102,13 +1111,16 @@
       <div class="card"
            style="background:#121212;border:1px solid #2a2a2a;border-radius:18px;
                   overflow:hidden;transition:.3s;">
-        <img src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=1200&auto=format&fit=crop"
+           <img src="assets/media/unsplash-1504805572947-800.webp"
+             srcset="assets/media/unsplash-1504805572947-480.webp 480w, assets/media/unsplash-1504805572947-800.webp 800w, assets/media/unsplash-1504805572947-1200.webp 1200w"
+             sizes="(max-width:600px) 100vw, 400px"
              alt="Event Showcase"
              width="400"
              height="200"
              loading="lazy"
              decoding="async"
-             style="width:100%;height:200px;object-fit:cover;">
+             style="width:100%;height:200px;object-fit:cover;"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=1200&auto=format&fit=crop';">
         <div style="padding:20px;">
           <span class="badge">Demo</span>
           <h3>Event Showcase Demo</h3>
