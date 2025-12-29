@@ -2,20 +2,14 @@
   "name": "OHA Development - MO Smart Glasses",
   "short_name": "OHA MO",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#020203",
   "theme_color": "#000000",
+  "description": "MO Smart Glasses pre-order page — MO1 & MO2. Early access and priority support.",
+  "categories": ["shopping","productivity"],
   "icons": [
-    {
-      "src": "assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
     {
       "src": "favicon.svg",
       "sizes": "any",
