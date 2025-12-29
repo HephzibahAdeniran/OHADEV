@@ -5,7 +5,8 @@ const CORE_ASSETS = [
   '/index.html',
   '/manifest.json',
   '/favicon.svg',
-  '/assets/css/main.css'
+  '/assets/css/main.css',
+  '/assets/media/freepik-luxury-800.webp'
 ];
 
 // During install, cache core assets for offline and faster repeat loads
@@ -47,6 +48,22 @@ self.addEventListener('fetch', (event) => {
   // Avoid intercepting navigation responses here so the browser can use the back/forward
   // cache (bfcache) and restore pages more reliably. Static caching of samples is still
   // handled by the install/activate steps above.
+
+  // Styles: cache-first for CSS
+  if (url.pathname.endsWith('.css') || event.request.destination === 'style') {
+    event.respondWith(
+      caches.match(event.request).then(resp => {
+        if (resp) return resp;
+        return fetch(event.request).then(net => {
+          return caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, net.clone());
+            return net;
+          });
+        });
+      })
+    );
+    return;
+  }
 
   // Images: stale-while-revalidate
   if (url.pathname.startsWith('/assets/media') || /\.(png|jpg|jpeg|webp|svg)$/.test(url.pathname)) {
