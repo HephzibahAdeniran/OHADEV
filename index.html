@@ -1875,6 +1875,57 @@ document.addEventListener("DOMContentLoaded", () => {
     var send=document.getElementById('chat-send');
     var msgs=document.getElementById('chat-messages');
     var history=[];
+    function wiki(t){
+      return fetch('https://en.wikipedia.org/w/api.php?action=opensearch&search='+encodeURIComponent(t)+'&limit=1&namespace=0&format=json&origin=*')
+        .then(function(r){return r.json()})
+        .then(function(arr){
+          var title = arr && arr[1] && arr[1][0];
+          if (!title) return null;
+          return fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title))
+            .then(function(r){return r.json()})
+            .then(function(js){
+              if (js && js.extract) {
+                var link = js.content_urls && js.content_urls.desktop && js.content_urls.desktop.page ? js.content_urls.desktop.page : ('https://en.wikipedia.org/wiki/'+encodeURIComponent(title));
+                return js.extract + ' More: ' + link;
+              }
+              return null;
+            });
+        }).catch(function(){return null});
+    }
+    function ddg(t){
+      return fetch('https://api.duckduckgo.com/?q='+encodeURIComponent(t)+'&format=json&no_html=1&skip_disambig=1')
+        .then(function(r){return r.json()})
+        .then(function(js){
+          if (js && js.AbstractText) return js.AbstractText;
+          if (js && js.RelatedTopics && js.RelatedTopics.length) {
+            var rt = js.RelatedTopics[0];
+            if (rt && rt.Text) return rt.Text;
+          }
+          return null;
+        }).catch(function(){return null});
+    }
+    function fallbackWeb(text){
+      wiki(text).then(function(w){
+        if (w) {
+          msg('assistant', w);
+        } else {
+          ddg(text).then(function(d){
+            if (d) {
+              msg('assistant', d);
+            } else {
+              msg('assistant','I could not reach the helper right now.');
+              var a=document.createElement('a');
+              a.href='#products-contact';
+              a.textContent='Contact OHA';
+              a.className='btn';
+              a.addEventListener('click',function(e){e.preventDefault();location.href='#products-contact';});
+              msgs.appendChild(a);
+              msgs.scrollTop=msgs.scrollHeight;
+            }
+          });
+        }
+      });
+    }
     function open(){panel.classList.add('open'); input.focus();}
     function hide(){panel.classList.remove('open'); launcher.focus();}
     function msg(role,text){
@@ -1898,24 +1949,32 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(function(j){var c=j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || ''; msg('assistant',c)})
         .catch(function(){msg('assistant','AI service error. Remove key to use built-in helper.')});
       } else {
-        fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:text}],googleApiKey:(localStorage.getItem('google_cse_key')||window.GOOGLE_CSE_KEY||''),googleCseCx:(localStorage.getItem('google_cse_cx')||window.GOOGLE_CSE_CX||''),serpApiKey:(localStorage.getItem('serp_api_key')||window.SERP_API_KEY||'')})})
-          .then(function(r){return r.ok?r.json():Promise.reject(r)})
-          .then(function(j){
-            msg('assistant',j.content||'');
-            if (j && j.cta && j.cta.href) {
-              var a=document.createElement('a');
-              a.href=j.cta.href;
-              a.textContent=j.cta.label||'Contact';
-              a.className='btn';
-              a.addEventListener('click',function(e){
-                e.preventDefault();
-                location.href=j.cta.href;
-              });
-              msgs.appendChild(a);
-              msgs.scrollTop=msgs.scrollHeight;
-            }
-          })
-          .catch(function(){msg('assistant','I could not reach the helper right now.')});
+        var body = {messages:[{role:'user',content:text}],googleApiKey:(localStorage.getItem('google_cse_key')||window.GOOGLE_CSE_KEY||''),googleCseCx:(localStorage.getItem('google_cse_cx')||window.GOOGLE_CSE_CX||''),serpApiKey:(localStorage.getItem('serp_api_key')||window.SERP_API_KEY||'')};
+        var proceed = function(){
+          fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+            .then(function(r){return r.ok?r.json():Promise.reject(r)})
+            .then(function(j){
+              msg('assistant',j.content||'');
+              if (j && j.cta && j.cta.href) {
+                var a=document.createElement('a');
+                a.href=j.cta.href;
+                a.textContent=j.cta.label||'Contact';
+                a.className='btn';
+                a.addEventListener('click',function(e){
+                  e.preventDefault();
+                  location.href=j.cta.href;
+                });
+                msgs.appendChild(a);
+                msgs.scrollTop=msgs.scrollHeight;
+              }
+            })
+            .catch(function(){fallbackWeb(text)});
+        };
+        if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+          navigator.serviceWorker.ready.then(function(){proceed()}).catch(function(){fallbackWeb(text)});
+        } else {
+          proceed();
+        }
       }
     }
     launcher.addEventListener('click',open);
